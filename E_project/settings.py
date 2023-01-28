@@ -18,7 +18,7 @@ TEMPLATES_DIRS = BASE_DIR / 'templates'
 STATIC_DIR = BASE_DIR / "static"
 MEDIA_ROOT = BASE_DIR / "media"
 
-STATIC_ROOT = '/home/testingsites/E_Project/E_Project/E_Project/static'
+STATIC_ROOT = '/home/testingsites/E_Project/E_Project/static'
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
