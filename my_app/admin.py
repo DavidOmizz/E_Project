@@ -12,6 +12,6 @@ class ProductAdmin(admin.ModelAdmin):
 admin.site.register(Category)
 @admin.register(Order)
 class OrderAdmin(admin.ModelAdmin):
-    list_display = ('customer_name','post','quantity','shipping_address')
+    list_display = ('customer_name','post','quantity','shipping_address','status')
     search_fields = ['subject', 'body']
 

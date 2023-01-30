@@ -15,6 +15,9 @@ class Category(models.Model):
     name = models.CharField(max_length=255)
     cat_image = models.ImageField()
 
+    def __str__(self):
+        return self.name
+
 class Product(models.Model):
     product_name = models.CharField(max_length=255)
     description = models.TextField()
