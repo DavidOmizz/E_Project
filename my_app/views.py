@@ -1,4 +1,4 @@
-from django.shortcuts import render, HttpResponseRedirect
+from django.shortcuts import render, HttpResponseRedirect, get_object_or_404
 from django.http import HttpResponse
 from .models import *
 from .forms import OrderForm
@@ -10,11 +10,15 @@ from django.contrib.messages.views import SuccessMessageMixin
 def thankyou(request):
     return render(request, 'thankyou.html')
 
-def index(request):
+def index(request,category_slug=None):
     template_name = 'shop.html'
     product = Product.objects.all().order_by('-created_at')
+    categories = None
     category = Category.objects.all()
-    return render(request, template_name, {'product': product, 'category':category} )
+    if category_slug:
+        categories = get_object_or_404(Category,slug=category_slug)
+        product = product.filter(categories=categories)
+    return render(request, template_name, {'product': product, 'category':category, 'categories':categories} )
 
 
 def productDetail(request, pk):
