@@ -1,4 +1,4 @@
-from django.shortcuts import render, HttpResponseRedirect
+from django.shortcuts import render, HttpResponseRedirect, redirect
 from django.http import HttpResponse
 from .models import *
 from .forms import OrderForm
@@ -14,8 +14,20 @@ def index(request):
     template_name = 'shop.html'
     product = Product.objects.all().order_by('-created_at')
     category = Category.objects.all()
+    categoryID = request.GET.get('category')
+    if categoryID:
+        product = Product.objects.filter(category=categoryID)
+    else:
+        product = Product.objects.all().order_by('-created_at')
+        
     return render(request, template_name, {'product': product, 'category':category} )
 
+def category(request, pk):
+    template_name = 'categories.html'
+    category = Category.objects.get(id=pk)
+    product = Product.objects.filter(category=category)
+
+    return render(request, template_name, {'product':product})
 
 def productDetail(request, pk):
     template_name = 'shop-single.html'
