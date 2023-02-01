@@ -91,35 +91,17 @@
           <div class="col-md-12 order-2">
 
             <div class="row">
+                {% if category %}
+                {% for category in category %}
               <div class="col-md-12 mb-2">
-                <div class="col-md-3 order-1 mb-4">
-                  <!-- <div class="border p-4 rounded mb-4">
-                    <h3 class="mb-3 h6 text-uppercase text-black d-block">Categories</h3>
-                    <ul class="list-unstyled mb-0">
-                      {% for cat in category %}
-                      <li class="mb-1"><a href="{% url 'categorys' cat.id %}" class="d-flex"><span>{{ cat.name }}</span> <span class="text-black ml-auto">{{ cat.count }}</span></a></li>
-                      {% endfor %}
-                      <li class="mb-1"><a href="#" class="d-flex"><span>Women</span> <span class="text-black ml-auto">(2,550)</span></a></li>
-                      <li class="mb-1"><a href="#" class="d-flex"><span>Children</span> <span class="text-black ml-auto">(2,124)</span></a></li>
-                    </ul>
-                  </div> -->
-                  <form action="{% url 'home' %}" method="get">
-                    <select name="category">
-                      <option value="">All Categories</option>
-                      {% for c in category %}
-                        <option value="{{ c.id }}" {% if c.id == categoryID %}selected{% endif %}>{{ c.name }}</option>
-                      {% endfor %}
-                    </select>
-                    <input type="submit" value="Search">
-                  </form>
-                </div>
-                <div class="text-center mb-4"><h2 class="text-black h3">All Product</h2></div>
-
+                <div class="float-md-left mb-4"><h2 class="text-black h5">{{ category.name }}</h2></div>
               </div>
+              {% endfor %}
+              {% endif %}
             </div>
             <div class="row mb-5">
               {% if product %}
-              {% for p in product %}
+              {% for p in test %}
               <div class="col-sm-6 col-lg-4 mb-4" data-aos="fade-up">
                 <div class="block-4 text-center border">
                   <figure class="block-4-image">
@@ -274,9 +256,23 @@
 
             </div>
           </div>
-         
 
-          
+          {% if category %}
+          <!-- {% for cat in category %} -->
+          <div class="col-md-3 order-1 mb-5 mb-md-0">
+            <div class="border p-4 rounded mb-4">
+              <h3 class="mb-3 h6 text-uppercase text-black d-block">Categories</h3>
+              <ul class="list-unstyled mb-0">
+                {% for cat in category %}
+                <li class="mb-1"><a href="{% url 'cat' %}" class="d-flex"><span>{{ cat.name }}</span> <span class="text-black ml-auto">{{ cat.count }}</span></a></li>
+                {% endfor %}
+                <!-- <li class="mb-1"><a href="#" class="d-flex"><span>Women</span> <span class="text-black ml-auto">(2,550)</span></a></li>
+                <li class="mb-1"><a href="#" class="d-flex"><span>Children</span> <span class="text-black ml-auto">(2,124)</span></a></li> -->
+              </ul>
+            </div>
+          </div>
+          <!-- {% endfor %} -->
+          {% endif %}
         </div>
 
         <div class="row">
@@ -288,8 +284,7 @@
                   </div>
                 </div>
                 <div class="row">
-                  {% if category %}
-                  {% for cat in category %}
+                    {% for cat in category %}
                   <div class="col-sm-6 col-md-6 col-lg-4 mb-4 mb-lg-0" data-aos="fade" data-aos-delay="100">
                     <a class="block-2-item" href="#">
                       <figure class="image">
@@ -302,7 +297,6 @@
                     </a>
                   </div>
                   {% endfor %}
-                  {% endif %}
                   <!-- <div class="col-sm-6 col-md-6 col-lg-4 mb-5 mb-lg-0" data-aos="fade" data-aos-delay="100">
                     <a class="block-2-item" href="#">
                       <figure class="image">
