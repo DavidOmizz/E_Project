@@ -4,23 +4,67 @@ from .models import *
 from .forms import OrderForm
 from django.contrib import messages
 from django.contrib.messages.views import SuccessMessageMixin
+from django.db.models import Q
+
 
 # Create your views here.
 
 def thankyou(request):
     return render(request, 'thankyou.html')
 
+# def index(request):
+#     template_name = 'shop.html'
+#     product = Product.objects.all().order_by('-created_at')
+#     category = Category.objects.all()
+#     categoryID = request.GET.get('category')
+#     if categoryID:
+#         product = Product.objects.filter(category=categoryID)
+#     else:
+#         product = Product.objects.all().order_by('-created_at')
+
+#     query = request.GET.get('q')
+#     if query:
+#         product = Product.objects.filter(Q(product_name__icontains = query) | Q(category__icontains= query)).order_by('-created_at')
+#         return product
+#     else:
+#         product = Product.objects.all()
+#     return render(request, template_name, {'product': product, 'category':category} )
+
 def index(request):
     template_name = 'shop.html'
     product = Product.objects.all().order_by('-created_at')
     category = Category.objects.all()
     categoryID = request.GET.get('category')
-    if categoryID:
-        product = Product.objects.filter(category=categoryID)
-    else:
-        product = Product.objects.all().order_by('-created_at')
-        
-    return render(request, template_name, {'product': product, 'category':category} )
+    query = request.GET.get('q')
+    message = ''
+    category_id = request.GET.get('category')
+
+#     if categoryID and query:
+#         product = Product.objects.filter(
+#             Q(category=categoryID) & 
+#             (Q(product_name__icontains=query) | 
+#              Q(category__icontains=query))
+#         ).order_by('-created_at')
+#     elif categoryID:
+#         product = Product.objects.filter(category=categoryID).order_by('-created_at')
+#     elif query:
+#         product = Product.objects.filter(
+#             Q(product_name__icontains=query) | 
+#             Q(category__icontains=query)
+#         ).order_by('-created_at')
+
+    if query or category_id:
+        if query and category_id:
+            product = product.filter(Q(product_name__icontains=query) & Q(category__id=categoryID))
+        elif query:
+            product = product.filter(product_name__icontains=query)
+        else:
+            product = product.filter(category__id=categoryID)
+
+    if not product:
+        message = 'No products found with the selected category'
+
+    return render(request, template_name, {'product': product, 'category':category,'message': message})
 
 def category(request, pk):
     template_name = 'categories.html'
