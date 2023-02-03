@@ -79,34 +79,29 @@
     <div class="bg-light py-3">
       <div class="container">
         <div class="row">
-          <div class="col-md-12 mb-0"><a href="{% url 'home' %}">Home</a> <span class="mx-2 mb-0">/</span> <strong class="text-black">Shop</strong></div>
+          <div class="col-md-6 mb-0"><a href="{% url 'home' %}">Home</a> <span class="mx-2 mb-0">/</span> <strong class="text-black">Shop</strong></div>
         </div>
       </div>
     </div>
 
     <div class="site-section">
       <div class="container">
-
         <div class="row mb-5">
           <div class="col-md-12 order-2">
-
             <div class="row">
               <div class="col-md-12 mb-2">
-                <div class="col-md-3 order-1 mb-4">
-                  
+                <div class="col-md-3 order-1 mb-2">
                   <form action="{% url 'home' %}" method="get">
-                    <select name="category">
+                    <select name="category" style="border: 1px silver solid; border-radius: 5px;">
                       <option value="">All Categories</option>
                       {% for c in category %}
                         <option value="{{ c.id }}" {% if c.id == categoryID %}selected{% endif %}>{{ c.name }}</option>
                       {% endfor %}
                     </select>
-                    <input type="submit" value="Search">
+                    <input type="submit" style="background-color:#7971ea; border:none; border-radius:5px; color:#fff; padding: 5px 15px;" value="Search">
                   </form>
                 </div>
                 <div class="text-center mb-4"><h2 class="text-black h3">All Products</h2></div>
-                
-
               </div>
             </div>
             {% if message %}
@@ -277,11 +272,7 @@
             {% endif %}
 
           </div>
-
-
-
         </div>
-
         <div class="row">
           <div class="col-md-12">
             <div class="site-section site-blocks-2">
@@ -334,7 +325,6 @@
           </div>
 
         </div>
-
       </div>
     </div>
 
@@ -408,7 +398,7 @@
             </p>
           </div>
 
-        </div> -->
+        </div>
       </div>
     </footer>
   </div>
