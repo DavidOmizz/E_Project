@@ -62,7 +62,7 @@ def index(request):
             product = product.filter(category__id=categoryID)
 
     if not product:
-        message = 'No products found'
+        message = 'No products found!'
     # if not product:
     #     messages.warning(request, 'No products found with the selected category')
 
