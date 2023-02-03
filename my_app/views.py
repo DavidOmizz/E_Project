@@ -62,7 +62,9 @@ def index(request):
             product = product.filter(category__id=categoryID)
 
     if not product:
-        message = 'No products found with the selected category'
+        message = 'No products found'
+    # if not product:
+    #     messages.warning(request, 'No products found with the selected category')
 
     return render(request, template_name, {'product': product, 'category':category,'message': message})
 
